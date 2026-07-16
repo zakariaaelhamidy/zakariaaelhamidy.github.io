@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="ar" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zakariaa El Hamidy</title>
+    <link rel="icon" type="image/x-icon" href="file:///C:/Users/ZAKARIAA%20EL%20HAMIDY/Pictures/Capture%20d%E2%80%99%C3%A9cran%202026-03-24%20222511.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+         :root {
+            --primary-blue: #0066cc;
+            --dark-blue: #001a33;
+            --light-blue: #00b4ff;
+            --cyan: #00ffff;
+            --electric-blue: #0080ff;
+            --white: #ffffff;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--dark-blue);
+            color: var(--white);
+            overflow-x: hidden;
+        }
+        /* Animated Network Background */
+        
+        #network-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(135deg, #001a33 0%, #003366 50%, #001a33 100%);
+        }
+        /* Navigation */
+        
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(0, 26, 51, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid var(--light-blue);
+            box-shadow: 0 0 20px rgba(0, 180, 255, 0.3);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--light-blue), var(--cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(0, 180, 255, 0.5);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--white);
+            font-weight: 600;
+            transition: all 0.3s;
+            padding: 0.5rem 1rem;
+            border: 1px solid transparent;
+        }
+        
+        .nav-links a:hover {
+            color: var(--cyan);
+            border: 1px solid var(--light-blue);
+            box-shadow: 0 0 15px rgba(0, 180, 255, 0.4);
+        }
+        /* Hero Section */
+        
+        .hero {
+            margin-top: 80px;
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            position: relative;
+        }
+        
+        .hero-content {
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+            max-width: 1200px;
+            width: 100%;
+        }
+        
+        .hero-image {
+            flex: 1;
+            text-align: center;
+        }
+        
+        .profile-container {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .profile-img {
+            width: 350px;
+            height: 350px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--light-blue);
+            box-shadow: 0 0 40px rgba(0, 180, 255, 0.6), 0 0 80px rgba(0, 128, 255, 0.4), inset 0 0 40px rgba(0, 180, 255, 0.2);
+            animation: pulse 3s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%,
+            100% {
+                box-shadow: 0 0 40px rgba(0, 180, 255, 0.6), 0 0 80px rgba(0, 128, 255, 0.4);
+            }
+            50% {
+                box-shadow: 0 0 60px rgba(0, 180, 255, 0.8), 0 0 120px rgba(0, 128, 255, 0.6);
+            }
+        }
+        
+        .glow-ring {
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border-radius: 50%;
+            border: 2px solid var(--cyan);
+            animation: rotate 10s linear infinite;
+        }
+        
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        
+        .hero-text {
+            flex: 1;
+        }
+        
+        .hero-text h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--white), var(--cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: glow 2s ease-in-out infinite;
+        }
+        
+        @keyframes glow {
+            0%,
+            100% {
+                filter: drop-shadow(0 0 10px rgba(0, 180, 255, 0.5));
+            }
+            50% {
+                filter: drop-shadow(0 0 25px rgba(0, 180, 255, 0.8));
+            }
+        }
+        
+        .hero-text .tagline {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--light-blue);
+            font-weight: 600;
+        }
+        
+        .hero-text p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            line-height: 1.8;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+        }
+        
+        .btn {
+            padding: 1rem 2.5rem;
+            border: 2px solid var(--light-blue);
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            background: transparent;
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--light-blue), var(--cyan));
+            transition: left 0.3s;
+            z-index: -1;
+        }
+        
+        .btn:hover::before {
+            left: 0;
+        }
+        
+        .btn:hover {
+            color: var(--dark-blue);
+            box-shadow: 0 0 30px rgba(0, 180, 255, 0.6);
+            transform: translateY(-3px);
+        }
+        /* Section Styles */
+        
+        section {
+            padding: 5rem 2rem;
+            position: relative;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            background: linear-gradient(135deg, var(--light-blue), var(--cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--light-blue), var(--cyan));
+            box-shadow: 0 0 10px var(--light-blue);
+        }
+        /* About Section */
+        
+        .about {
+            background: rgba(0, 26, 51, 0.8);
+            border-top: 2px solid rgba(0, 180, 255, 0.3);
+            border-bottom: 2px solid rgba(0, 180, 255, 0.3);
+        }
+        
+        .about-content {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .about p {
+            font-size: 1.2rem;
+            line-height: 2;
+            margin-bottom: 2rem;
+            padding: 2rem;
+            background: rgba(0, 102, 204, 0.1);
+            border: 1px solid rgba(0, 180, 255, 0.3);
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 180, 255, 0.1);
+        }
+        
+        .skills {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+        
+        .skill-tag {
+            background: linear-gradient(135deg, rgba(0, 102, 204, 0.3), rgba(0, 180, 255, 0.3));
+            border: 2px solid var(--light-blue);
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 0 15px rgba(0, 180, 255, 0.2);
+        }
+        
+        .skill-tag:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 25px rgba(0, 180, 255, 0.5);
+        }
+        /* Social Section */
+        
+        .social {
+            background: rgba(0, 51, 102, 0.5);
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .social-card {
+            background: rgba(0, 102, 204, 0.2);
+            padding: 2rem;
+            border: 2px solid var(--light-blue);
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s;
+            min-width: 150px;
+            backdrop-filter: blur(5px);
+        }
+        
+        .social-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 30px rgba(0, 180, 255, 0.5);
+            border-color: var(--cyan);
+        }
+        
+        .social-card i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--light-blue);
+        }
+        
+        .social-card a {
+            text-decoration: none;
+            color: var(--white);
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        /* Events Section */
+        
+        .events {
+            background: rgba(0, 26, 51, 0.9);
+        }
+        
+        .events-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .event-card {
+            background: rgba(0, 102, 204, 0.15);
+            border: 2px solid rgba(0, 180, 255, 0.3);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s;
+            backdrop-filter: blur(5px);
+        }
+        
+        .event-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 40px rgba(0, 180, 255, 0.4);
+            border-color: var(--cyan);
+        }
+        
+        .event-image {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-bottom: 2px solid rgba(0, 180, 255, 0.3);
+        }
+        
+        .event-content {
+            padding: 1.5rem;
+        }
+        
+        .event-date {
+            color: var(--cyan);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+        
+        .event-title {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: var(--white);
+        }
+        
+        .event-description {
+            color: var(--light-blue);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+        
+        .event-location {
+            color: var(--cyan);
+            font-size: 0.9rem;
+        }
+        
+        .event-location i {
+            margin-right: 0.5rem;
+        }
+        /* Footer */
+        
+        footer {
+            background: rgba(0, 10, 20, 0.95);
+            border-top: 2px solid var(--light-blue);
+            text-align: center;
+            padding: 2rem;
+            box-shadow: 0 -5px 20px rgba(0, 180, 255, 0.2);
+        }
+        
+        footer p {
+            opacity: 0.8;
+        }
+        /* Responsive */
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            .hero-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            .profile-img {
+                width: 250px;
+                height: 250px;
+            }
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+            .cta-buttons {
+                justify-content: center;
+            }
+            .events-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        /* Loading Animation */
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Network Background Canvas -->
+    <canvas id="network-canvas"></canvas>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">ZEH</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#social">Social</a></li>
+                <li><a href="#events">Events</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="hero-image">
+                <div class="profile-container">
+                    <div class="glow-ring"></div>
+                    <img src="file:///C:/Users/ZAKARIAA%20EL%20HAMIDY/Pictures/Capture%20d%E2%80%99%C3%A9cran%202026-03-24%20222511.png" alt="Profile" class="profile-img">
+                </div>
+            </div>
+            <div class="hero-text">
+                <h1>Zakariaa El Hamidy</h1>
+                <p class="tagline">Tech Enthusiast & Developer</p>
+                <p>Hi, I'm Zakariaa El Hamidy, a Flutter and Full-Stack Developer from Morocco with a passion for robotics, IoT, and software development. I build modern mobile applications, web platforms, and Arduino-based projects that solve real-world
+                    problems. I enjoy turning ideas into reliable, user-friendly digital solutions through continuous learning and innovation.</p>
+                <div class="cta-buttons">
+                    <a href="#social" class="btn">Contact Me</a>
+                    <a href="#about" class="btn">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <p>
+                    I'm Zakariaa El Hamidy, a Flutter and Full-Stack developer passionate about technology, robotics, and innovation. I enjoy designing mobile applications, websites, and IoT projects that address real-world needs. Every project is an opportunity for me to
+                    learn new technologies and improve my software development skills.
+                </p>
+                <p>
+                    In addition to development, I am interested in user experience, problem solving and creating reliable and modern solutions. My goal is to participate in innovative projects, collaborate with other developers and continue to evolve in the fields of mobile
+                    development, web and embedded systems.
+                </p>
+                <div class="skills">
+                    <span class="skill-tag">JavaScript</span>
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">HTML</span>
+                    <span class="skill-tag">CSS</span>
+                    <span class="skill-tag">Flutter</span>
+                    <span class="skill-tag">Arduino</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Section -->
+    <section class="social" id="social">
+        <div class="container">
+            <h2 class="section-title">Connect With Me</h2>
+            <div class="social-links">
+                <div class="social-card">
+                    <i class="fab fa-instagram"></i>
+                    <a href="https://www.instagram.com/zakariaa_el_hamidy/" target="_blank">Instagram</a>
+                </div>
+                <div class="social-card">
+                    <i class="fab fa-linkedin"></i>
+                    <a href="https://www.linkedin.com/in/zakariaa-el-hamidy/" target="_blank">LinkedIn</a>
+                </div>
+                <div class="social-card">
+                    <i class="fab fa-github"></i>
+                    <a href="https://github.com/zakariaaelhamidy" target="_blank">GitHub</a>
+                </div>
+                <div class="social-card">
+                    <i class="fab fa-whatsapp"></i>
+                    <a href="https://wa.me/+21264543343" target="_blank">WhatsApp</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Events Section -->
+    <section class="events" id="events">
+        <div class="container">
+            <h2 class="section-title">Events I Attended</h2>
+            <div class="events-grid">
+                <div class="event-card fade-in">
+                    <img src="file:///C:/Users/ZAKARIAA%20EL%20HAMIDY/Downloads/%E2%9C%A8%20Digital%20Now%202025%20-%20Casablanca%20%E2%9C%A8Retour%20sur%20Digital%20Now%202025,%20un%20%C3%A9v%C3%A9nement%20d%E2%80%99envergure%20d%C3%A9di%C3%A9%20%C3%A0%20%20(4).webp" alt="Tech Conference"
+                        class="event-image">
+                    <div class="event-content">
+                        <div class="event-date">
+                            <i class="far fa-calendar"></i> December 2025
+                        </div>
+                        <h3 class="event-title">Digital Now 2025</h3>
+                        <p class="event-description">
+                            un événement d’envergure dédié à la transformation digitale, qui s’est déroulé sur trois jours,à Casablanca. Cette édition a réuni startuppers, TPE et PME, autour des enjeux clés de la digitalisation, véritable levier de performance, d’innovation et de
+                            compétitivité pour les entreprises. Au fil des conférences et des échanges, plusieurs intervenants et experts ont mis en lumière l’importance stratégique du numérique pour le développement et la pérennité des startups et des
+                            sociétés, dans un écosystème en pleine évolution. La clôture de l’événement a été marquée par la visite de Mme la Ministre de la Digitalisation et de la Transition Numérique, Mme Amal El Fallah Seghrouchni, soulignant le soutien
+                            institutionnel aux initiatives favorisant la transformation digitale au Maroc.
+                        </p>
+                        <div class="event-location">
+                            <i class="fas fa-map-marker-alt"></i> Casablanca, Morocco
+                        </div>
+                    </div>
+                </div>
+
+                <div class="event-card fade-in">
+                    <img src="file:///C:/Users/ZAKARIAA%20EL%20HAMIDY/Downloads/%F0%9F%8E%8C%20Japan%20Day%20au%20ALX%20Hub%20Technopark%20Casablanca%20%F0%9F%87%AF%F0%9F%87%B5Le%2012%20octobre,%20j%E2%80%99ai%20eu%20le%20plaisir%20de%20participe.jpg" alt="Web Workshop"
+                        class="event-image">
+                    <div class="event-content">
+                        <div class="event-date">
+                            <i class="far fa-calendar"></i> october 2025
+                        </div>
+                        <h3 class="event-title">Japan Day au ALX Hub</h3>
+                        <p class="event-description">
+                            Le 12 octobre, j’ai eu le plaisir de participer à l’événement Japan Day, organisé au ALX Hub Technopark Casablanca — une expérience unique dédiée à la découverte de la culture japonaise et à l’échange interculturel. <br>Durant
+                            cette journée, j’ai eu l’occasion d’explorer différents aspects de la culture du Japon à travers des activités ludiques et collaboratives :<br>🕹️ des jeux interactifs, <br>💡 des Kahoots et quiz culturels, <br>💬 des débats
+                            dynamiques,
+                            <br>🎭 et plusieurs animations qui favorisent la communication, la créativité et le travail d’équipe. Au-delà de la simple découverte culturelle, cette expérience m’a permis de créer de nouvelles connexions, de renforcer les
+                            liens avec mes camarades, et de vivre un moment à la fois drôle, instructif et inspirant.
+
+                        </p>
+                        <div class="event-location">
+                            <i class="fas fa-map-marker-alt"></i> Casablanca, Morocco
+                        </div>
+                    </div>
+                </div>
+
+                <div class="event-card fade-in">
+                    <img src="file:///C:/Users/ZAKARIAA%20EL%20HAMIDY/Downloads/%F0%9F%96%A5%EF%B8%8F%20Hackathon%20de%20conception%203D%20au%20lyc%C3%A9e%20Ibn%20Mandour%20%F0%9F%8E%A8%F0%9F%8F%ABLe%2017%20octobre,%20jai%20eu%20lhonneur%20de%20par.webp" alt="AI Summit"
+                        class="event-image">
+                    <div class="event-content">
+                        <div class="event-date">
+                            <i class="far fa-calendar"></i> october 2025
+                        </div>
+                        <h3 class="event-title">🖥️ Hackathon de conception 3D au lycée Ibn Mandour 🎨🏫</h3>
+                        <p class="event-description">
+                            Le 17 octobre, j'ai eu l'honneur de participer au hackathon de conception 3D organisé au lycée Ibn Mandour. Ce fut une expérience enrichissante alliant innovation, créativité et collaboration. Au cours de cette journée riche en événements, j'ai pu explorer
+                            et appliquer différents aspects de la modélisation 3D grâce à des ateliers et des défis stimulants : <br>⚙️ Création de modèles 3D, <br>🧩 Travail en équipe sur des projets collaboratifs, <br>💡
+                            Résolution de défis techniques, <br>🎤 Partage d'idées et présentation de petits projets, 📐 Utilisation d'outils et de logiciels de modélisation. Outre l'apprentissage technique, ce hackathon m'a permis de : <br>🤝 Favoriser
+                            l'esprit d'équipe, <br>🌟 Développer ma créativité, <br>📈 Améliorer mes compétences pratiques, <br>💬 Créer des liens avec d'autres passionnés de technologie.
+                        </p>
+                        <div class="event-location">
+                            <i class="fas fa-map-marker-alt"></i> Casablanaa, Morocco
+                        </div>
+                    </div>
+                </div>
+
+                <div class="event-card fade-in">
+                    <img src="file:///C:/Users/ZAKARIAA%20EL%20HAMIDY/Downloads/-%F0%9F%8E%89%E2%9C%A8%20%C3%89v%C3%A9nement%20au%20Lyc%C3%A9e%20Ibn%20Mandour%20!%20%E2%9C%A8%F0%9F%8E%89Aujourd%E2%80%99hui,%20nous%20avons%20v%C3%A9cu%20un%20moment%20inoubliable%20au%20.webp"
+                        alt="Startup Meetup" class="event-image">
+                    <div class="event-content">
+                        <div class="event-date">
+                            <i class="far fa-calendar"></i> november 2025
+                        </div>
+                        <h3 class="event-title">🎉✨ Événement au Lycée Ibn Mandour ! ✨🎉
+                        </h3>
+                        <p class="event-description">
+                            Aujourd’hui, nous avons vécu un moment inoubliable au lycée Ibn Mandour ! Entre rires, découvertes et partages, cet événement a rapproché élèves et enseignants dans une ambiance pleine de joie et d’énergie positive. 💫 Merci à tous ceux qui ont participé
+                            et contribué à rendre cette journée exceptionnelle ! 🙌📚
+
+                        </p>
+                        <div class="event-location">
+                            <i class="fas fa-map-marker-alt"></i> Casablanca, Morocco
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Zakariaa El Hamidy. All Rights Reserved. | Tech Network Theme</p>
+    </footer>
+
+    <script>
+        // Network Animation
+        const canvas = document.getElementById('network-canvas');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        let particles = [];
+        const particleCount = 100;
+        const connectionDistance = 150;
+        const mouseDistance = 200;
+
+        let mouse = {
+            x: null,
+            y: null
+        };
+
+        window.addEventListener('mousemove', (e) => {
+            mouse.x = e.x;
+            mouse.y = e.y;
+        });
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.vx = (Math.random() - 0.5) * 0.5;
+                this.vy = (Math.random() - 0.5) * 0.5;
+                this.size = Math.random() * 2 + 1;
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+
+                if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+
+                // Mouse interaction
+                if (mouse.x != null) {
+                    let dx = mouse.x - this.x;
+                    let dy = mouse.y - this.y;
+                    let distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < mouseDistance) {
+                        const forceDirectionX = dx / distance;
+                        const forceDirectionY = dy / distance;
+                        const force = (mouseDistance - distance) / mouseDistance;
+                        const directionX = forceDirectionX * force * 2;
+                        const directionY = forceDirectionY * force * 2;
+
+                        this.vx += directionX * 0.05;
+                        this.vy += directionY * 0.05;
+                    }
+                }
+            }
+
+            draw() {
+                ctx.fillStyle = 'rgba(0, 180, 255, 0.5)';
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function init() {
+            particles = [];
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+
+                // Draw connections
+                for (let j = i; j < particles.length; j++) {
+                    let dx = particles[i].x - particles[j].x;
+                    let dy = particles[i].y - particles[j].y;
+                    let distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < connectionDistance) {
+                        ctx.beginPath();
+                        let opacity = 1 - (distance / connectionDistance);
+                        ctx.strokeStyle = `rgba(0, 180, 255, ${opacity * 0.3})`;
+                        ctx.lineWidth = 1;
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+
+            requestAnimationFrame(animate);
+        }
+
+        init();
+        animate();
+
+        // Scroll Animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach((el) => observer.observe(el));
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
